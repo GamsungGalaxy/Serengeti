@@ -7,7 +7,8 @@
     "start": "nodemon server/server.js",
     "webpack": "./node_modules/.bin/webpack -w",
     "build": "NODE_ENV=production webpack",
-    "dev": "concurrently \"NODE_ENV=development webpack serve --open\" \"nodemon server/server.js\""
+    "dev": "concurrently \"NODE_ENV=development webpack serve --open\" \"nodemon server/server.js\"",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,14 +26,15 @@
     "body-parser": "^1.20.0",
     "express": "^4.12.3",
     "pg": "^8.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/react": "^13.2.0",
     "babel-loader": "^8.2.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -42,6 +44,7 @@
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "isomorphic-fetch": "^3.0.0",
+    "jest": "^28.1.0",
     "nodemon": "^2.0.7",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
