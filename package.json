@@ -1,6 +1,6 @@
 {
-  "name": "bookexchangeapp",
-  "version": "1.0.0",
+  "name": "serengeti",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,23 +12,34 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ExchangeBook/BookExchangeApp.git"
+    "url": "git+https://github.com/GamsungGalaxy/Serengeti.git"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-jsdom",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ExchangeBook/BookExchangeApp/issues"
+    "url": "https://github.com/GamsungGalaxy/Serengeti/issues"
   },
-  "homepage": "https://github.com/ExchangeBook/BookExchangeApp#readme",
+  "homepage": "https://github.com/GamsungGalaxy/Serengeti#readme",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/user-event": "^14.1.1",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "express": "^4.12.3",
+    "jest-environment-jsdom": "^28.1.0",
+    "node-fetch": "^3.2.4",
     "pg": "^8.5.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
