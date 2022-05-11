@@ -5,7 +5,8 @@ const path = require('path');
 const PORT = 3000;
 const app = express();
 
-const apiRouter = require('./routes/api');
+const bookRouter = require('./routes/bookRouter');
+const userRouter = require('./routes/userRouter');
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -19,7 +20,8 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 /**
  * define route handlers
  */
-app.use('/api', apiRouter);
+app.use('/api/book', bookRouter);
+app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
