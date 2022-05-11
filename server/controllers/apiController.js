@@ -1,27 +1,36 @@
-const { default: axios } = require('axios');
+const axios = require('axios').default;
 
 const apiController = {};
 
 apiController.findBook = (req, res, next) => {
-  if (res.locals.bookInDB) return next();
-  const { isbn } = req.body;
+  console.log('got into apiController.findBook');
+  // if (res.locals.bookInDB) return next();
+  // const { isbn } = req.body;
+
   let authorEndpoint;
-  axios.get(`https://openlibrary.org/isbn/${isbn}.json`)
+  // axios.get(`https://openlibrary.org/isbn/${isbn}.json`)
+  // axios.get(`https://openlibrary.org/isbn/9781400079988.json`)
+  axios.get('https://openlibrary.org/api/books?bibkeys=ISBN:9780980200447&jscmd=details&format=json')
     .then((response) => {
-      const bookInfo = response.data;
-      let { title, authors, subjects } = bookInfo;
-      if (!subjects) subjects = ['Unknown'];
-      if (!authors) authors = ['Unknown'];
-      res.locals.authorEndpoint = authors[0].key;
-      res.locals.book = { isbn_13: isbn, title: title, subjects: subjects[0] };
-      return next();
+      console.log('are we in here')
+      console.log(response)
+      // const bookInfo = response.data;
+      // let { title, authors, subjects } = bookInfo;
+      // if (!subjects) subjects = ['Unknown'];
+      // if (!authors) authors = ['Unknown'];
+      // res.locals.authorEndpoint = authors[0].key;
+      // res.locals.book = { ISBN: isbn };
+      // return next();
+      return res
     })
     .catch((err) => {
       const defaultErr = {
         log: 'ERROR found in apiController.findBook',
         message: { err: `There was an error${err}` },
       };
-      return next(defaultErr);
+      console.log(defaultErr)
+      return (defaultErr)
+      // return next(defaultErr);
     });
 };
 

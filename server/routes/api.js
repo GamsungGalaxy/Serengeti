@@ -7,8 +7,9 @@ const userController = require('../controllers/userController');
 //const db = require('../models/booksModels');
 
 
-router.get('/findBook', apiController.findBook, apiController.findAuthor, (req, res) => {
-  return res.status(200).json(res.locals.bookInDB);
+router.get('/findBook', apiController.findBook, (req, res) => {
+  /*apiController.findAuthor,*/ 
+  return res.status(200).json(res.locals);
 });
 
 // input is JSON object that must include { "isbn": "9780060244194"}
