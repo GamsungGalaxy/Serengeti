@@ -1,14 +1,14 @@
 import React from 'react';
 import App from '../client/App.jsx';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SearchBookRow from '../client/components/SearchBookRow.jsx';
+import regeneratorRuntime from 'regenerator-runtime';
 
 describe('Unit testing React components', () => {
   describe('NavBar', () => {
     let nav;
 
-    beforeAll(() => {
+    beforeEach(() => {
       nav = render(<App />);
     });
     
@@ -16,39 +16,17 @@ describe('Unit testing React components', () => {
       expect(screen.getByText('Home')).toBeInTheDocument();
       expect(screen.getByText('My Books')).toBeInTheDocument();
       expect(screen.getByText('Find Books')).toBeInTheDocument();
-      expect(screen.getByText('Log out')).toBeInTheDocument();
-      
-      // expect(screen.getByRole('nav-items')).toContainBLAHBLAHBLAH;
-      // fireEvent.click();
+      expect(screen.getByText('Log Out')).toBeInTheDocument();
     });
 
-    test('Each link, when clicked, should send the user to the proper route', () => {
-      
-    });
-  });
-
-  xdescribe('SearchBookRow', () => {
-    let searchBar;
-
-    beforeAll(() => {
-      searchBar = render(<SearchBookRow />);
-    });
-
-    test('Renders search bar with user input', () => {
-
+    xtest('Each link, when clicked, should send the user to the proper route', () => {
+      // Click button
+      // const user = userEvent.setup(); // Initialize userEvent
+      // render(<App />);
+      fireEvent.click(screen.getByTestId('mybooks'));
+      // expect() // .../mypage
+      const mypageTest = screen.getByText('Add');
+      expect(mypageTest).toBeInTheDocument();
     });
   });
-
-
-  xdescribe('MyBookRow', () => {
-    let myBookRow
-
-    beforeAll(() => {
-      myBookRow = render(<MyBookRow/>);
-    });
-    test('Renders if delete book functions properly', () => {
-        
-    });
-  });
-    
 });
