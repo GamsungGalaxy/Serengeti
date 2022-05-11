@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../client/App.jsx';
+import App from '../../client/App.jsx';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import regeneratorRuntime from 'regenerator-runtime';
