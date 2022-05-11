@@ -1,7 +1,7 @@
 import React from 'react';
 import App from '../client/App.jsx';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import Nav from '../client/components/Nav';
+import userEvent from '@testing-library/user-event';
 import SearchBookRow from '../client/components/SearchBookRow.jsx';
 
 describe('Unit testing React components', () => {
@@ -9,24 +9,25 @@ describe('Unit testing React components', () => {
     let nav;
 
     beforeAll(() => {
-      nav = render(<Nav/>);
+      nav = render(<App />);
     });
     
-    test('Renders the nav bar with four(4) components: Home, My Books, Find Books, Log out', () => {
-      expect(screen.getByRole('nav-items')).toContainBLAHBLAHBLAH;
-
-      fireEvent.click();
-
-      expect(nav.getByRole('ul').nextSibling).toHaveTextContent('Home');
-      expect(nav.getByRole('ul').nextSibling).toHaveTextContent('My Books');
-      expect(nav.getByRole('ul').nextSibling).toHaveTextContent('Find Books');
-      expect(nav.getByRole('ul').nextSibling).toHaveTextContent('Log out');
+    test('NavBar contains four(4) components: Home, My Books, Find Books, Log out', () => {
+      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(screen.getByText('My Books')).toBeInTheDocument();
+      expect(screen.getByText('Find Books')).toBeInTheDocument();
+      expect(screen.getByText('Log out')).toBeInTheDocument();
       
+      // expect(screen.getByRole('nav-items')).toContainBLAHBLAHBLAH;
+      // fireEvent.click();
+    });
+
+    test('Each link, when clicked, should send the user to the proper route', () => {
       
     });
   });
 
-  describe('SearchBookRow', () => {
+  xdescribe('SearchBookRow', () => {
     let searchBar;
 
     beforeAll(() => {
@@ -39,7 +40,7 @@ describe('Unit testing React components', () => {
   });
 
 
-describe('MyBookRow', () => {
+  xdescribe('MyBookRow', () => {
     let myBookRow
 
     beforeAll(() => {
