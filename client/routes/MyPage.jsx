@@ -5,7 +5,11 @@ class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myoldbooks: [],
+      myoldbooks: [{
+        artist: 'Led Zeppelin',
+        title:  'Stairway to Heaven',
+        year: 1972
+      }],
     }
     this.getMyOldBooks();
     this.rerender = this.rerender.bind(this);
@@ -29,13 +33,13 @@ class MyPage extends React.Component {
 
   addOldBook = (e) => {
     e.preventDefault();
-    fetch('/api/record/findRecordByRelease', {
+    fetch('/api/record/addRecordByRelease', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ release: document.getElementById('release').value, condition: document.getElementById('condition').value })
+      body: JSON.stringify({ release: document.getElementById('release').value, condition: document.getElementById('condition').value, userID: '1' })
     })
       .then(response => response.json())
       .then((data) => {
@@ -44,9 +48,6 @@ class MyPage extends React.Component {
         this.setState({
           myoldbooks: [...prevState, data]
         })
-        // data: { artist, title, year }
-        // display data.artist, data.title, data.year
-        // window.location.href = window.location.href;
       });
   }
 
@@ -69,13 +70,16 @@ class MyPage extends React.Component {
         </tr>)
       for (let i = 0; i < this.state.myoldbooks.length; i++) {
         rows.push(<MyBookRow
-          {...this.state.myoldbooks[i]}
+          artist={this.state.myoldbooks[i].artist}
+          title={this.state.myoldbooks[i].title}
+          year={this.state.myoldbooks[i].year}
           key={i}
           rerender={this.rerender}
-        />)
-      }
+        />);
+      };
       table = <table className="result-table">{rows}</table>
-    }
+    };
+    
     return (
       <div className="search-box">
         <form className="search-form">

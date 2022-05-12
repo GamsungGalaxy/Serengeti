@@ -71,9 +71,10 @@ a {
 
 .drawing-description {
   color: #4a4141;
-  text-align: right;
-  font-size: 25px;
-  margin-left: 5%;
+  text-align: center;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 30px;
+  margin-left: 0%;
 }
 
 .blob {

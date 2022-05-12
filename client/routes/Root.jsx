@@ -7,7 +7,7 @@ class Root extends React.Component {
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             width="595.28px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 595.28 595.28" xmlSpace="preserve">
           <g id="housing">
-            <rect fill="#00632E" width="595.28" height="595.28"/>
+            <rect fill="#e0d3c4" width="595.28" height="595.28"/>
             <g>
               <path opacity="0.3" fill="#1A171B" d="M399.079,362.701V118.856c0-15.271-12.381-27.651-27.651-27.651H62.551
                 c-15.273,0-27.651,12.38-27.651,27.651v243.845c0,0.104,0.014,0.201,0.016,0.306h364.148
@@ -368,7 +368,7 @@ class Root extends React.Component {
         </svg>
         </div>
         <div className="drawing-description">
-          Trade and discover records from all over the world, <br />at Serengeti!
+          Trade and discover records from all over the world at<br />Serengeti
         </div>
         <div className="blob">
           <svg xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 350">
