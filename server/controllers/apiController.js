@@ -11,7 +11,7 @@ apiController.findRecord = async (req, res, next) => {
     // verifying object has property
     const release = req.body.release;
     const condition = req.body.condition;
-    const userID = '1'
+    const userID = '1';
     // will be sanitized on front end
     // verify that string is correct format (13 characters long)
     // const userID = res.body.userID;
