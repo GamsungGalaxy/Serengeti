@@ -39,7 +39,13 @@ class MyPage extends React.Component {
     })
       .then(response => response.json())
       .then((data) => {
-        console.log('hey i am in mypage good job', data)
+        console.log('hey i am in mypage good job', data);
+        let prevState = this.state.myoldbooks; // an array;
+        this.setState({
+          myoldbooks: [...prevState, data]
+        })
+        // data: { artist, title, year }
+        // display data.artist, data.title, data.year
         // window.location.href = window.location.href;
       });
   }
@@ -55,9 +61,9 @@ class MyPage extends React.Component {
     if (this.state.myoldbooks.length > 0) {
       rows.push(
         <tr>
-          <th key={0}>Title</th>
-          <th key={1}>Author</th>
-          <th key={2}>ISBN</th>
+          <th key={0}>Artist</th>
+          <th key={1}>Title</th>
+          <th key={2}>Year</th>
           <th key={3}>Condition</th>
           <th key={4}></th>
         </tr>)

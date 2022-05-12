@@ -49,6 +49,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={this.state.loggedIn ? [<Nav />, <Root />] : <Login login={this.handleLogin}/>}></Route>
+            <Route path="/mypage" element={this.state.loggedIn ? [<Nav />, <MyPage />] : <Login login={this.handleLogin}/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

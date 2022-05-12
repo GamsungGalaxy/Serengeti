@@ -1,10 +1,10 @@
-const axios = require('axios').default;
+const axios = require('axios');
 const Record = require('../models/recordModels');
 const apiController = {};
 
 // looks up release, stores it in user database
 apiController.findRecord = async (req, res, next) => {
-  console.log(req.body);
+  console.log('req.body is: ', req.body);
   try {
     // console.log(res);
     // out of request, extract release number and user id
@@ -12,6 +12,7 @@ apiController.findRecord = async (req, res, next) => {
     const release = req.body.release;
     const condition = req.body.condition;
     const userID = '1';
+    console.log('Release number is: ', release);
     // will be sanitized on front end
     // verify that string is correct format (13 characters long)
     // const userID = res.body.userID;
@@ -21,18 +22,21 @@ apiController.findRecord = async (req, res, next) => {
       `https://api.discogs.com/releases/${release}`,
       { headers: { 'User-Agent': 'serengeti/0.1.1' } }
     );
+    console.log('Response is: ', response);
     const artistInfo = response.data;
     const { title, year } = artistInfo;
     const artist = artistInfo.artists[0].name;
 
     res.locals.data = { artist, title, year };
+    
     const data = await new Record({
       artist,
       title,
       year,
       condition,
     });
-    data.save((err, record) => console.log('record saved!'));
+    
+    data.save((err, record) => console.log('Record successfully saved!'));
     return next();
   } catch (err) {
     return next({
