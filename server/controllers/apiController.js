@@ -31,7 +31,7 @@ apiController.addRecord = async (req, res, next) => {
     data.save((err, record) => console.log('record saved!'));
 
     // attach data to server response to send to client
-    res.locals.data = { artist, title, year, userID };
+    res.locals.data = { artist, title, year, userID, condition };
 
     return next();
   } catch (err) {
@@ -47,8 +47,8 @@ apiController.addRecord = async (req, res, next) => {
 apiController.getCollection = async (req, res, next) => {
   try {
     // inspect request
-    const { userID } = req.body;
-    // const userID = '1';
+    // const { userID } = req.body;
+    const userID = '1';
 
     // send request to db
     const dbResponse = await Record.find({ userID });

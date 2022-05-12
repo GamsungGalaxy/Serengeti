@@ -22,8 +22,6 @@ class App extends React.Component {
     e.preventDefault();
     const username = e.target.username.value;
     const password = e.target.password.value;
-    console.log('username is: ', username);
-    console.log('password is: ', password);
 
     if (username && password) {
       // redirect to Home
@@ -50,6 +48,8 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={this.state.loggedIn ? [<Nav />, <Root />] : <Login login={this.handleLogin}/>}></Route>
             <Route path="/mypage" element={this.state.loggedIn ? [<Nav />, <MyPage />] : <Login login={this.handleLogin}/>}></Route>
+            <Route path="/search" element={[<Nav />, <Search loggedIn={this.state.loggedIn} userID={this.state.userID} />]}></Route>
+            <Route path="/logout" element={<Login login={this.handleLogin}/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
@@ -65,7 +65,6 @@ export default App;
           <Routes>
             <Route path="/login" element={<Login loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
             <Route path="/register" element={<Register loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
-            <Route path="/search" element={<Search loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
             <Route path="/" element={<Root />}></Route>
             <Route path="/">
               {this.state.loggedIn ? <Redirect to="/" /> : <Login />}

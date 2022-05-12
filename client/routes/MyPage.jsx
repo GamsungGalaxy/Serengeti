@@ -1,16 +1,18 @@
 const React = require('react');
 import MyBookRow from '../components/MyBookRow';
 
+// {
+//   artist: 'Led Zeppelin',
+//   title:  'Stairway to Heaven',
+//   year: 1972
+// }
+
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myoldbooks: [{
-        artist: 'Led Zeppelin',
-        title:  'Stairway to Heaven',
-        year: 1972
-      }],
-    }
+      myoldbooks: [],
+    };
     this.getMyOldBooks();
     this.rerender = this.rerender.bind(this);
     this.getMyOldBooks = this.getMyOldBooks.bind(this);
@@ -18,18 +20,20 @@ class MyPage extends React.Component {
   }
 
   getMyOldBooks = () => {
-    fetch('/api/getMyOldBookList', {
+    fetch('/api/record/getMyCollection', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
+      },
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ myoldbooks: data });
+        this.setState((prevState)=>{ 
+          return {myoldbooks: [...prevState.myoldbooks, ...data]};
       });
-  }
+    });
+  };
 
   addOldBook = (e) => {
     e.preventDefault();
@@ -43,10 +47,10 @@ class MyPage extends React.Component {
     })
       .then(response => response.json())
       .then((data) => {
-        console.log('hey i am in mypage good job', data);
-        let prevState = this.state.myoldbooks; // an array;
-        this.setState({
-          myoldbooks: [...prevState, data]
+        // let prevState = this.state.myoldbooks; // an array;
+        this.setState((prev) => {
+          const {artist, title, year, condition, userID} = data.data;
+          return {myoldbooks: [...prev.myoldbooks, {artist, title, year, condition, userID}]};
         })
       });
   }
@@ -73,6 +77,7 @@ class MyPage extends React.Component {
           artist={this.state.myoldbooks[i].artist}
           title={this.state.myoldbooks[i].title}
           year={this.state.myoldbooks[i].year}
+          condition={this.state.myoldbooks[i].condition}
           key={i}
           rerender={this.rerender}
         />);
@@ -103,11 +108,3 @@ class MyPage extends React.Component {
 }
 
 export default MyPage;
-
-
-
-
-
-
-
-

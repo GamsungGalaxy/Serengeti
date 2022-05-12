@@ -23,7 +23,8 @@ class MyBookRow extends React.Component {
         <td>{this.props.artist}</td>
         <td>{this.props.title}</td>
         <td>{this.props.year}</td>
-        <td><center><button type="button" className="req-button" onClick={this.deleteMyOldBook}>delete</button></center></td>
+        <td>{this.props.condition}</td>
+        <td><center><button type="button" className="req-button" onClick={this.deleteMyOldBook}>Remove</button></center></td>
       </tr>
     )
   }

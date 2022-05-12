@@ -37,8 +37,8 @@ a {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
-  font-size: 17.5px;
-  font-family: 'Josefin Slab', serif;
+  font-size: 20px;
+  font-family: 'Bodoni Moda', serif;
 }
 
 .nav-items a {
@@ -80,10 +80,10 @@ a {
 .blob {
   position: absolute;
   top: 5vh;
-  left: 15%;
+  left: 55%;
   fill: #a8b3852e;
-  width: 0vmax;
-  z-index: 1;
+  width: 25vmax;
+  z-index: -1;
   animation: move 10s ease-in-out infinite;
   transform-origin: 50% 50%;
 }
@@ -120,7 +120,7 @@ a {
 
 .usercred-title {
   margin-bottom: 15px;
-  font-family: 'Bodoni Moda';
+  font-family: 'Bodoni Moda', serif;
   text-align: center;
 }
 
