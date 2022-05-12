@@ -13,8 +13,11 @@ const userController = require('../controllers/userController');
  *
  * for now, we will just return this object as a JSON as a response
  */
-router.post('/findRecordByRelease/', apiController.findRecord, (req, res) => {
-  console.log('/findbook, about to send out response');
+router.get('/getMyCollection', apiController.getCollection, (req, res) => {
+  return res.status(200).json(res.locals);
+});
+
+router.post('/addRecordByRelease/', apiController.addRecord, (req, res) => {
   return res.status(200).json(res.locals);
 });
 
