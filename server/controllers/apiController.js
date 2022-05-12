@@ -2,35 +2,38 @@ const axios = require('axios').default;
 const Record = require('../models/recordModels');
 const apiController = {};
 
+// looks up release, stores it in user database
 apiController.findRecord = async (req, res, next) => {
+  console.log(req.body);
   try {
-    // out of request, extract isbn
+    // console.log(res);
+    // out of request, extract release number and user id
     // verifying object has property
-    const release = '6008401';
+    const release = req.body.release;
+    const condition = req.body.condition;
+    const userID = '1'
     // will be sanitized on front end
     // verify that string is correct format (13 characters long)
-
+    // const userID = res.body.userID;
     // insert it into 3rd party api call
     // fetch/axios
-    // const response = await axios.get(
-    //   `https://api.discogs.com/releases/${release}`,
-    //   { headers: { 'User-Agent': 'serengeti/0.1.1' } }
-    // );
-    // const artist = response.artists[0].name;
-    // const title = response.title;
-    // const year = response.year;
-    // res.locals.data = { artist, title, year };
+    const response = await axios.get(
+      `https://api.discogs.com/releases/${release}`,
+      { headers: { 'User-Agent': 'serengeti/0.1.1' } }
+    );
+    const artistInfo = response.data;
+    const { title, year } = artistInfo;
+    const artist = artistInfo.artists[0].name;
+
+    res.locals.data = { artist, title, year };
     const data = await new Record({
-      artist: 'test',
-      title: 'titletest',
-      year: '666',
+      artist,
+      title,
+      year,
+      condition,
     });
     data.save((err, record) => console.log('record saved!'));
-    // get response, verify response
-    // verify object has properties we want
     return next();
-    // attach to response object
-    // object.
   } catch (err) {
     return next({
       log: 'ERROR found in apiController.findRecord',
