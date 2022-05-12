@@ -5,7 +5,15 @@ const path = require('path');
 const PORT = 3000;
 const app = express();
 
-const bookRouter = require('./routes/bookRouter');
+const mongoose = require('mongoose');
+mongoose.connect(
+  'mongodb+srv://admin:hi@record.l4dzw.mongodb.net/record?retryWrites=true&w=majority'
+);
+mongoose.connection.once('open', () => {
+  console.log('connected!');
+});
+
+const recordRouter = require('./routes/recordRouter');
 const userRouter = require('./routes/userRouter');
 
 app.use(express.json());
@@ -14,13 +22,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.static(path.resolve(__dirname, '../client')));
-// Awww thank you <3 <3 
+// Awww thank you <3 <3
 // You're welcome :)
 
 /**
  * define route handlers
  */
-app.use('/api/book', bookRouter);
+app.use('/api/record', recordRouter);
 app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
@@ -29,7 +37,7 @@ app.get('/', (req, res) => {
 
 // unknown route ****Since we are using react router, 404 error will be handled on the front end side****
 // app.use((req, res) => res.status(404).send('Unknown page, please try again.'));
-app.use("*", (req, res) => {
+app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
