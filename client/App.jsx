@@ -59,11 +59,11 @@ class App extends React.Component {
 export default App;
 
         {/* <Router>
+<Route path="/mypage" element={<MyPage loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
           <Nav loggedIn={this.state.loggedIn} userID={this.state.userID} />
           <Routes>
             <Route path="/login" element={<Login loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
             <Route path="/register" element={<Register loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
-            <Route path="/mypage" element={<MyPage loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
             <Route path="/search" element={<Search loggedIn={this.state.loggedIn} userID={this.state.userID} />}></Route>
             <Route path="/" element={<Root />}></Route>
             <Route path="/">

@@ -16,7 +16,7 @@ const recordSchema = new Schema({
   condition: {
     type: String,
   },
-  owner: {
+  userID: {
     type: String,
   },
 });

@@ -29,17 +29,18 @@ class MyPage extends React.Component {
 
   addOldBook = (e) => {
     e.preventDefault();
-    fetch('/api/addOldBook', {
+    fetch('/api/record/findRecordByRelease', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ isbn: document.getElementById('isbn').value, condition: document.getElementById('condition').value })
+      body: JSON.stringify({ release: document.getElementById('release').value, condition: document.getElementById('condition').value })
     })
       .then(response => response.json())
       .then((data) => {
-        window.location.href = window.location.href;
+        console.log('hey i am in mypage good job', data)
+        // window.location.href = window.location.href;
       });
   }
 
@@ -72,7 +73,7 @@ class MyPage extends React.Component {
     return (
       <div className="search-box">
         <form className="search-form">
-          <input type="text" placeholder="Add book by isbn" name="isbn" id="isbn" required />
+          <input type="text" placeholder="Add record by release" name="release" id="release" required />
           <select id="condition" name="condition">
             <option value="Like New">Like New</option>
             <option value="Fine">Fine</option>
@@ -83,7 +84,7 @@ class MyPage extends React.Component {
           </select>
           <input type="submit" value="Add" onClick={this.addOldBook} />
         </form>
-        <div class="result-box">
+        <div className="result-box">
           {table}
         </div>
       </div>
