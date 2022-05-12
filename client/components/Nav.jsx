@@ -8,8 +8,8 @@ class Nav extends React.Component {
       navComponents.push(
         <ul className="nav-items">
           <li key={0}><Link to="/">Home</Link></li>
-          <li key={1}><Link to="/mypage" data-testid="mybooks">My Books</Link></li>
-          <li key={2}><Link to="/search">Find Books</Link></li>
+          <li key={1}><Link to="/mypage" data-testid="mybooks">My Records</Link></li>
+          <li key={2}><Link to="/search">Find Records</Link></li>
           <li key={3}><Link to="/">Log Out</Link></li>
         </ul>
       )
