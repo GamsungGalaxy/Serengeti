@@ -7,7 +7,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 mongoose.connect(
-  'mongodb+srv://admin:hi@record.l4dzw.mongodb.net/record?retryWrites=true&w=majority'
+  'mongodb+srv://gamsung:gamsung123@gamsung.pxh6h.mongodb.net/record?retryWrites=true&w=majority'
 );
 mongoose.connection.once('open', () => {
   console.log('connected!');
