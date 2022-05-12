@@ -10,7 +10,7 @@ mongoose.connect(
   'mongodb+srv://gamsung:gamsung123@gamsung.pxh6h.mongodb.net/record?retryWrites=true&w=majority'
 );
 mongoose.connection.once('open', () => {
-  console.log('connected!');
+  console.log('MongoDB Connection Successful!');
 });
 
 const recordRouter = require('./routes/recordRouter');

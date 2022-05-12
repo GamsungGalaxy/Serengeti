@@ -50,7 +50,7 @@ class Search extends React.Component {
     return (
       <div className="search-box">
         <form className="search-form">
-          <input type="text" placeholder="search book by title" name="title" id="searchString" required />
+          <input type="text" placeholder="search album by title" name="title" id="searchString" required />
           <input type="submit" value="search" onClick={this.searchBook} />
         </form>
         <div className="result-box">

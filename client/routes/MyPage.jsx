@@ -1,12 +1,18 @@
 const React = require('react');
 import MyBookRow from '../components/MyBookRow';
 
+// {
+//   artist: 'Led Zeppelin',
+//   title:  'Stairway to Heaven',
+//   year: 1972
+// }
+
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       myoldbooks: [],
-    }
+    };
     this.getMyOldBooks();
     this.rerender = this.rerender.bind(this);
     this.getMyOldBooks = this.getMyOldBooks.bind(this);
@@ -14,33 +20,38 @@ class MyPage extends React.Component {
   }
 
   getMyOldBooks = () => {
-    fetch('/api/getMyOldBookList', {
+    fetch('/api/record/getMyCollection', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
+      },
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ myoldbooks: data });
+        this.setState((prevState)=>{ 
+          return {myoldbooks: [...prevState.myoldbooks, ...data]};
       });
-  }
+    });
+  };
 
   addOldBook = (e) => {
     e.preventDefault();
-    fetch('/api/record/findRecordByRelease', {
+    fetch('/api/record/addRecordByRelease', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ release: document.getElementById('release').value, condition: document.getElementById('condition').value })
+      body: JSON.stringify({ release: document.getElementById('release').value, condition: document.getElementById('condition').value, userID: '1' })
     })
       .then(response => response.json())
       .then((data) => {
-        console.log('hey i am in mypage good job', data)
-        // window.location.href = window.location.href;
+        // let prevState = this.state.myoldbooks; // an array;
+        this.setState((prev) => {
+          const {artist, title, year, condition, userID} = data.data;
+          return {myoldbooks: [...prev.myoldbooks, {artist, title, year, condition, userID}]};
+        })
       });
   }
 
@@ -55,21 +66,25 @@ class MyPage extends React.Component {
     if (this.state.myoldbooks.length > 0) {
       rows.push(
         <tr>
-          <th key={0}>Title</th>
-          <th key={1}>Author</th>
-          <th key={2}>ISBN</th>
+          <th key={0}>Artist</th>
+          <th key={1}>Title</th>
+          <th key={2}>Year</th>
           <th key={3}>Condition</th>
           <th key={4}></th>
         </tr>)
       for (let i = 0; i < this.state.myoldbooks.length; i++) {
         rows.push(<MyBookRow
-          {...this.state.myoldbooks[i]}
+          artist={this.state.myoldbooks[i].artist}
+          title={this.state.myoldbooks[i].title}
+          year={this.state.myoldbooks[i].year}
+          condition={this.state.myoldbooks[i].condition}
           key={i}
           rerender={this.rerender}
-        />)
-      }
+        />);
+      };
       table = <table className="result-table">{rows}</table>
-    }
+    };
+    
     return (
       <div className="search-box">
         <form className="search-form">
@@ -93,11 +108,3 @@ class MyPage extends React.Component {
 }
 
 export default MyPage;
-
-
-
-
-
-
-
-
