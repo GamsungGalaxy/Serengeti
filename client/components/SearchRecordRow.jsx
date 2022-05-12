@@ -1,6 +1,6 @@
 const React = require('react');
 
-class SearchBookRow extends React.Component {
+class SearchRecordRow extends React.Component {
   render(){
     return (
       <tr>
@@ -9,10 +9,10 @@ class SearchBookRow extends React.Component {
         <td>{this.props.isbn}</td>
         <td>{this.props.condition}</td>
         <td>{this.props.username}</td>
-        <td><center><button type="button" className="req-button">request</button></center></td>
+        <td><center><button type="button" className="req-button">Request</button></center></td>
       </tr>
     )
   }
 }
 
-export default SearchBookRow;
+export default SearchRecordRow;

@@ -14,7 +14,7 @@ mongoose.connection.once('open', () => {
 });
 
 const recordRouter = require('./routes/recordRouter');
-const userRouter = require('./routes/userRouter');
+// const userRouter = require('./routes/userRouter');
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -29,7 +29,7 @@ app.use(express.static(path.resolve(__dirname, '../client')));
  * define route handlers
  */
 app.use('/api/record', recordRouter);
-app.use('/api/user', userRouter);
+// app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));

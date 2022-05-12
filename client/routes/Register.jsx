@@ -28,7 +28,7 @@ class Register extends React.Component {
   render() {
     return (
       <div className="usercred-box">
-        <div className="usercred-title">Book Exchange</div>
+        <div className="usercred-title">Serengeti</div>
         <form className="usercred-form">
           <input type="text" placeholder="username" name="username" id="username" required />
           <input type="password" placeholder="password" name="password" id="password" required />

@@ -16,6 +16,14 @@ class App extends React.Component {
       userID: '1',
     };
     this.handleLogin = this.handleLogin.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(e) {
+    console.log('in logout');
+    this.setState((prevState) => {
+      return {...prevState, loggedIn :false};
+    });
   }
 
   handleLogin(e) {
@@ -46,10 +54,10 @@ class App extends React.Component {
         </div>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={this.state.loggedIn ? [<Nav />, <Root />] : <Login login={this.handleLogin}/>}></Route>
+            <Route path="/" element={this.state.loggedIn ? [<Nav logout={this.logout}/>, <Root />] : <Login login={this.handleLogin}/>}></Route>
             <Route path="/mypage" element={this.state.loggedIn ? [<Nav />, <MyPage />] : <Login login={this.handleLogin}/>}></Route>
             <Route path="/search" element={[<Nav />, <Search loggedIn={this.state.loggedIn} userID={this.state.userID} />]}></Route>
-            <Route path="/logout" element={<Login login={this.handleLogin}/>}></Route>
+            <Route path="/login" element={<Login login={this.handleLogin}/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

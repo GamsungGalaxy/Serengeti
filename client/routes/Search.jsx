@@ -1,18 +1,18 @@
 const React = require('react');
-import SearchBookRow from '../components/SearchBookRow';
+import SearchRecordRow from '../components/SearchRecordRow';
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      oldbooks: [],
+      oldrecords: [],
     }
-    this.searchBook = this.searchBook.bind(this);
+    this.searchRecord = this.searchRecord.bind(this);
   }
 
-  searchBook = (e) => {
+  searchRecord = (e) => {
     e.preventDefault();
-    fetch('/api/findOldBook', {
+    fetch('/api/findOldRecord', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,13 +21,13 @@ class Search extends React.Component {
       body: JSON.stringify({ searchString: document.getElementById('searchString').value })
     })
       .then(response => response.json())
-      .then(data => this.setState({ oldbooks: data }));
+      .then(data => this.setState({ oldrecords: data }));
   }
 
   render() {
     let table;
     const rows = [];
-    if (this.state.oldbooks.length > 0) {
+    if (this.state.oldrecords.length > 0) {
       rows.push(
         <tr>
           <th key={0}>Title</th>
@@ -37,10 +37,10 @@ class Search extends React.Component {
           <th key={4}>Owner</th>
           <th key={5}></th>
         </tr>)
-      for (let i = 0; i < this.state.oldbooks.length; i++) {
-        if (this.state.oldbooks[i].username !== 'max') {
-          rows.push(<SearchBookRow
-            {...this.state.oldbooks[i]}
+      for (let i = 0; i < this.state.oldrecords.length; i++) {
+        if (this.state.oldrecords[i].username !== 'max') {
+          rows.push(<SearchRecordRow
+            {...this.state.oldrecords[i]}
             key={i}
           />)
         }
@@ -51,7 +51,7 @@ class Search extends React.Component {
       <div className="search-box">
         <form className="search-form">
           <input type="text" placeholder="search album by title" name="title" id="searchString" required />
-          <input type="submit" value="search" onClick={this.searchBook} />
+          <input type="submit" value="search" onClick={this.searchRecord} />
         </form>
         <div className="result-box">
           {table}
