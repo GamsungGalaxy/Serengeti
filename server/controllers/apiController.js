@@ -1,49 +1,59 @@
 const axios = require('axios').default;
-
+const Record = require('../models/recordModels');
 const apiController = {};
 
-apiController.findBook = (req, res, next) => {
-  console.log('got into apiController.findBook');
-  // if (res.locals.bookInDB) return next();
-  // const { isbn } = req.body;
+// looks up release, stores it in user database
+apiController.findRecord = async (req, res, next) => {
+  console.log(req.body);
+  try {
+    // console.log(res);
+    // out of request, extract release number and user id
+    // verifying object has property
+    const release = req.body.release;
+    const condition = req.body.condition;
+    const userID = '1';
+    // will be sanitized on front end
+    // verify that string is correct format (13 characters long)
+    // const userID = res.body.userID;
+    // insert it into 3rd party api call
+    // fetch/axios
+    const response = await axios.get(
+      `https://api.discogs.com/releases/${release}`,
+      { headers: { 'User-Agent': 'serengeti/0.1.1' } }
+    );
+    const artistInfo = response.data;
+    const { title, year } = artistInfo;
+    const artist = artistInfo.artists[0].name;
 
-  let authorEndpoint;
-  // axios.get(`https://openlibrary.org/isbn/${isbn}.json`)
-  // axios.get(`https://openlibrary.org/isbn/9781400079988.json`)
-  axios.get('https://openlibrary.org/api/books?bibkeys=ISBN:9780980200447&jscmd=details&format=json')
-    .then((response) => {
-      console.log('are we in here')
-      console.log(response)
-      // const bookInfo = response.data;
-      // let { title, authors, subjects } = bookInfo;
-      // if (!subjects) subjects = ['Unknown'];
-      // if (!authors) authors = ['Unknown'];
-      // res.locals.authorEndpoint = authors[0].key;
-      // res.locals.book = { ISBN: isbn };
-      // return next();
-      return res
-    })
-    .catch((err) => {
-      const defaultErr = {
-        log: 'ERROR found in apiController.findBook',
-        message: { err: `There was an error${err}` },
-      };
-      console.log(defaultErr)
-      return (defaultErr)
-      // return next(defaultErr);
+    res.locals.data = { artist, title, year };
+    const data = await new Record({
+      artist,
+      title,
+      year,
+      condition,
     });
+    data.save((err, record) => console.log('record saved!'));
+    return next();
+  } catch (err) {
+    return next({
+      log: 'ERROR found in apiController.findRecord',
+      status: 518,
+      message: { err: err },
+    });
+  }
 };
 
 apiController.findAuthor = (req, res, next) => {
   if (res.locals.bookInDB) return next();
   const { authorEndpoint } = res.locals;
-  // if author code was not found in apiController.findBook, move onto next middleware function 
+  // if author code was not found in apiController.findBook, move onto next middleware function
   // and make author property unknown
   if (!authorEndpoint) {
     res.locals.book.author = 'Unknown';
     return next();
   }
-  axios.get(`https://openlibrary.org/${authorEndpoint}.json`)
+  axios
+    .get(`https://openlibrary.org/${authorEndpoint}.json`)
     .then((response) => {
       const authorInfo = response.data;
       const author = authorInfo.name;
@@ -61,26 +71,7 @@ apiController.findAuthor = (req, res, next) => {
 
 module.exports = apiController;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const { default: axios } = require("axios");
-
 
 // const apiController = {};
 // // from MDN
@@ -133,6 +124,5 @@ module.exports = apiController;
 //       return next(defaultErr);
 //     });
 // }
-
 
 // module.exports = apiController;
