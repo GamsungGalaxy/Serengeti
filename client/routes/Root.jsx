@@ -1,4 +1,5 @@
 const React = require('react');
+
 class Root extends React.Component {
   render() {
     return (
@@ -343,7 +344,6 @@ class Root extends React.Component {
             <rect x="329.048" y="195.069" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 717.4964 112.3551)" fill="#F6F6F6" fill-opacity="0.3" width="12.865" height="19.391"/>
           </g>
 
-
           <g id="needle">
             <g id="needle-inner">
               <g>
@@ -360,7 +360,6 @@ class Root extends React.Component {
                 </g>
 
                   <rect x="208.904" y="310.602" transform="matrix(0.4877 0.873 -0.873 0.4877 394.2956 -20.0779)" fill="#D9DADB" stroke="#B1B3B4" stroke-miterlimit="10" width="10.702" height="30.636"/>
-
                   <rect x="178.306" y="326.362" transform="matrix(0.4879 0.8729 -0.8729 0.4879 394.9152 10.786)" fill="#D9DADB" stroke="#B1B3B4" stroke-miterlimit="10" width="19.918" height="31.235"/>
               </g>
             </g>

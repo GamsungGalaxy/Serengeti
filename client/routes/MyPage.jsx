@@ -1,5 +1,5 @@
 const React = require('react');
-import MyBookRow from '../components/MyBookRow';
+import MyRecordRow from '../components/MyRecordRow';
 
 // {
 //   artist: 'Led Zeppelin',
@@ -11,15 +11,15 @@ class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myoldbooks: [],
+      myoldrecords: [],
     };
-    this.getMyOldBooks();
+    this.getMyOldRecords();
     this.rerender = this.rerender.bind(this);
-    this.getMyOldBooks = this.getMyOldBooks.bind(this);
-    this.addOldBook = this.addOldBook.bind(this);
+    this.getMyOldRecords = this.getMyOldRecords.bind(this);
+    this.addOldRecord = this.addOldRecord.bind(this);
   }
 
-  getMyOldBooks = () => {
+  getMyOldRecords = () => {
     fetch('/api/record/getMyCollection', {
       method: 'GET',
       headers: {
@@ -30,12 +30,12 @@ class MyPage extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState((prevState)=>{ 
-          return {myoldbooks: [...prevState.myoldbooks, ...data]};
+          return {myoldrecords: [...prevState.myoldrecords, ...data]};
       });
     });
   };
 
-  addOldBook = (e) => {
+  addOldRecord = (e) => {
     e.preventDefault();
     fetch('/api/record/addRecordByRelease', {
       method: 'POST',
@@ -47,23 +47,22 @@ class MyPage extends React.Component {
     })
       .then(response => response.json())
       .then((data) => {
-        // let prevState = this.state.myoldbooks; // an array;
         this.setState((prev) => {
           const {artist, title, year, condition, userID} = data.data;
-          return {myoldbooks: [...prev.myoldbooks, {artist, title, year, condition, userID}]};
+          return {myoldrecords: [...prev.myoldrecords, {artist, title, year, condition, userID}]};
         })
       });
   }
 
   rerender = () => {
-    this.getMyOldBooks();
+    this.getMyOldRecords();
     window.location.href = window.location.href;
   }
 
   render() {
     let table;
     const rows = [];
-    if (this.state.myoldbooks.length > 0) {
+    if (this.state.myoldrecords.length > 0) {
       rows.push(
         <tr>
           <th key={0}>Artist</th>
@@ -72,12 +71,12 @@ class MyPage extends React.Component {
           <th key={3}>Condition</th>
           <th key={4}></th>
         </tr>)
-      for (let i = 0; i < this.state.myoldbooks.length; i++) {
-        rows.push(<MyBookRow
-          artist={this.state.myoldbooks[i].artist}
-          title={this.state.myoldbooks[i].title}
-          year={this.state.myoldbooks[i].year}
-          condition={this.state.myoldbooks[i].condition}
+      for (let i = 0; i < this.state.myoldrecords.length; i++) {
+        rows.push(<MyRecordRow
+          artist={this.state.myoldrecords[i].artist}
+          title={this.state.myoldrecords[i].title}
+          year={this.state.myoldrecords[i].year}
+          condition={this.state.myoldrecords[i].condition}
           key={i}
           rerender={this.rerender}
         />);
@@ -97,7 +96,7 @@ class MyPage extends React.Component {
             <option value="Fair">Fair</option>
             <option value="Poor">Poor</option>
           </select>
-          <input type="submit" value="Add" onClick={this.addOldBook} />
+          <input type="submit" value="Add" onClick={this.addOldRecord} />
         </form>
         <div className="result-box">
           {table}

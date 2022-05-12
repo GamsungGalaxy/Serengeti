@@ -1,6 +1,6 @@
 const React = require('react');
 
-class MyBookRow extends React.Component {
+class MyRecordRow extends React.Component {
 
   // deleteMyOldBook = () => {
   //   fetch('/api/deleteOldBook', {
@@ -24,13 +24,13 @@ class MyBookRow extends React.Component {
         <td>{this.props.title}</td>
         <td>{this.props.year}</td>
         <td>{this.props.condition}</td>
-        <td><center><button type="button" className="req-button" onClick={this.deleteMyOldBook}>Remove</button></center></td>
+        <td><center><button type="button" className="req-button" onClick={this.deleteMyOldRecord}>Remove</button></center></td>
       </tr>
     )
   }
 }
 
-export default MyBookRow;
+export default MyRecordRow;
 
 
 
